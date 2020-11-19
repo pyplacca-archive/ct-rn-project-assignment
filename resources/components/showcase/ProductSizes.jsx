@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { variables } from '../../utils';
-import { Button } from '../'
+import { TextButton } from '../buttons'
 
 
 function ProductSizes ({list, onSizePress, selected, style}) {
@@ -9,11 +9,11 @@ function ProductSizes ({list, onSizePress, selected, style}) {
 		<View style={[styles.container, style]}>
 			{
 				list.map((size, i) => {
-					const {white, black} = colors,
+					const {primary, white, black} = colors,
 					[bg, fg] = size === selected ? [primary, white] : [white, black]
 
 					return (
-						<Button
+						<TextButton
 							key={i}
 							onPress={() => onSizePress(size)}
 							text={size}
@@ -33,7 +33,7 @@ function ProductSizes ({list, onSizePress, selected, style}) {
 };
 
 const { colors, dpi } = variables,
-btnSize = dpi.m + dpi.xs
+btnSize = dpi.m + dpi.xs * 2
 
 const styles = {
 	container: {
@@ -43,7 +43,7 @@ const styles = {
 
 	btn: {
 		borderRadius: dpi.xs,
-		marginHorizontal: dpi.xs + 5,
+		marginHorizontal: dpi.xs + 3,
 		width: btnSize,
 		height: btnSize,
 		alignItems: 'center',
@@ -60,7 +60,8 @@ const styles = {
 
 	text: {
 		textTransform: 'uppercase',
-		fontSize: dpi.s - 3
+		fontSize: dpi.s - 3,
+		fontWeight: '500',
 	},
 };
 
