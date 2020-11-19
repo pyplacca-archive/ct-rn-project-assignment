@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
-import { Icon, Rating } from '../components'
+import { Rating, Bar, ActionsBar } from '../components';
 import { ProductSizes, AddToCartLabel } from '../components/showcase';
 import * as icons from '../../assets/icons';
 import * as utils from '../utils';
@@ -8,24 +8,11 @@ import * as utils from '../utils';
 
 function ProductShowcase (props) {
 	const [selectedSize, setSelectedSize] = useState('M');
-	console.log(props)
 	// const {image, name, description, material, price, review, sizes} = props;
 	return (
 		<View style={styles.container}>
 			{/* back icon */}
-			<Icon
-				icon={icons.left}
-				outerStyle={styles.back}
-			/>
-			{/* actions bar icons */}
-			<View style={styles.actionsBar}>
-				{
-					[icons.cart, icons.heart].map((item, i) => (
-						<Icon icon={item} outerStyle={styles.actionsIcon} key={i} />
-					))
-				}
-				{/* <Icon icon={icons.heart} outerStyle={styles.actionIcon}/> */}
-			</View>
+			<ActionsBar onBack={() => console.log('back')}/>
 			{/* product image */}
 			<View style={styles.imgEnvelope}>
 				<Image source={props.image} style={styles.prodImg}/>
@@ -35,18 +22,19 @@ function ProductShowcase (props) {
 			{/* review */}
 			<View style={styles.review}>
 				<Text>Review : </Text>
-				<Rating
-					value={props.review}
-					total={5}
-					ratedImg={icons.starred}
-					nonRatedImg={icons.star}
-				/>
+				<Rating total={5} value={props.review} />
 			</View>
+			<Bar style={styles.bar}/>
 			{/* product description */}
 			<Text style={styles.descr}>{props.description}</Text>
 			{/* product materials */}
 			<View style={[styles.label, styles.matLabel]}>
-				<Text style={styles.matText}>Material: {props.material}</Text>
+				<Text
+					numberOfLines={1}
+					style={styles.matText}
+				>
+					Material: {props.material}
+				</Text>
 			</View>
 			{/* product sizes */}
 			{
@@ -59,7 +47,7 @@ function ProductShowcase (props) {
 				/>
 			}
 
-			<AddToCartLabel amount={props.price} currency='$' style={styles.addToCart}/>
+			<AddToCartLabel amount={props.price} style={styles.addToCart} />
 		</View>
 	)
 };
@@ -74,29 +62,12 @@ const styles = StyleSheet.create({
 		minHeight: '100vh'
 	},
 
-	back: {
-		position: 'fixed',
-		top: dpi.m,
-		left: dpi.m,
-		zIndex: 10,
-	},
-
-	actionsBar: {
-		position: 'fixed',
-		right: dpi.m,
-		top: dpi.m,
-		zIndex: 11,
-	},
-
-	actionsIcon: {
-		marginBottom: dpi.s,
-	},
-
 	imgEnvelope: {
 		position: 'relative',
 		alignItems: 'center',
 		backgroundColor: colors.white,
 		width: '90%',
+		maxWidth: 300,
 		height: dpi.xl * 2,
 		alignSelf: 'center',
 		borderRadius: dpi.m,
@@ -110,13 +81,18 @@ const styles = StyleSheet.create({
 
 	prodName: {
 		fontSize: dpi.m - 5,
-		fontWeight: 'bold',
+		fontWeight: '900',
 		marginBottom: dpi.s,
 	},
 
 	review: {
 		flexDirection: 'row',
 		alignItems: 'center',
+		marginBottom: dpi.s,
+	},
+
+	bar: {
+		width: dpi.l - dpi.s,
 		marginBottom: dpi.s,
 	},
 
@@ -155,7 +131,7 @@ const styles = StyleSheet.create({
 
 	addToCart: {
 		marginTop: dpi.m
-	}
+	},
 });
 
 export default ProductShowcase;
