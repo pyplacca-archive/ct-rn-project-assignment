@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { variables } from '../utils';
+import * as icons from '../../assets/icons'
 
 
 function Rating (props) {
@@ -8,8 +9,17 @@ function Rating (props) {
 
 	useEffect(() => setRating(props.value), [])
 
+	const changeRating = n => {
+		setRating(n)
+		props.onRatingChange && props.onRatingChange(n)
+	}
+
 	const {
-		value, total, ratedImg, nonRatedImg, imgStyle, orientation='horizontal'
+		total,
+		ratedImg=icons.starred, // default image
+		nonRatedImg=icons.star, // default image
+		imgStyle,
+		orientation='horizontal',
 	} = props;
 
 	return (
@@ -20,20 +30,23 @@ function Rating (props) {
 			]}
 		>
 			{
-				Array(total).fill().map((n, i) => {
-					return (
-						<TouchableOpacity
-							key={i}
-							onPress={() => setRating(i+1)}
-						>
-							<Image
-								source={i < rating ? ratedImg : nonRatedImg}
-								style={[ styles.img ]}
-							/>
+				Array(total).fill().map((_, i) => (
+					<TouchableOpacity
+						key={i}
+						onPress={() => changeRating(i+1)}
+					>
+						<Image
+							source={i < rating ? ratedImg : nonRatedImg}
+							style={[
+								styles.img,
+								imgStyle,
+								!i ? styles.first : {},
+								i === total-1 ? styles.last : {},
+							]}
+						/>
 
-						</TouchableOpacity>
-					)
-				})
+					</TouchableOpacity>
+				))
 			}
 		</View>
 	)
@@ -52,8 +65,16 @@ const styles = StyleSheet.create({
 
 	img: {
 		margin: dpi.xs - 2,
-		width: dpi.s,
-		height: dpi.s,
+		width: dpi.s - 2,
+		height: dpi.s - 2,
+	},
+
+	first: {
+		marginLeft: 0,
+	},
+
+	last: {
+		marginRight: 0,
 	}
 });
 
