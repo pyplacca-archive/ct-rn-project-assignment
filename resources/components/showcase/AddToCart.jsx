@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
-import { Button } from '../';
+import { TextButton } from '../buttons';
 import { variables } from '../../utils';
 
 
-function AddToCartLabel ({amount, currency, style}) {
+function AddToCartLabel ({amount, currency='$', style}) {
 	return (
 		<View style={[styles.container, style]}>
 			<View>
@@ -15,7 +15,7 @@ function AddToCartLabel ({amount, currency, style}) {
 					{currency}{amount}
 				</Text>
 			</View>
-			<Button
+			<TextButton
 				text='Add To Cart'
 				btnStyle={styles.addBtn}
 				textStyle={[styles.text, {fontWeight: 'bold'}]}
@@ -38,11 +38,11 @@ const styles = StyleSheet.create({
 	},
 
 	sup: {
-		fontSize: dpi.s - 3
+		fontSize: dpi.s - 4
 	},
 
 	amount: {
-		fontSize: dpi.m - 5,
+		fontSize: dpi.s + 7,
 		fontWeight: 'bold',
 	},
 
