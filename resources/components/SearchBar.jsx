@@ -1,5 +1,6 @@
 import React from 'react';
-import { TextInput, Text, StyleSheet } from 'react-native';
+import { View, TextInput, Text, StyleSheet } from 'react-native';
+import { TextButton } from './buttons';
 import { variables } from '../utils';
 
 
@@ -9,13 +10,13 @@ function SearchBar ({style, inputProps}) {
 			<TextInput
 				style={[styles.input, styles.child, style]}
 				placeholder='Search Jacket'
+				placeholderColor={colors.sea}
 				{...inputProps}
 			/>
-			<Text
-				style={[styles.child, styles.filterText]}
-			>
-				Filter
-			</Text>
+			<TextButton
+				text='Filter'
+				textStyle={[styles.child, styles.filterText]}
+			/>
 		</View>
 	)
 };
@@ -30,18 +31,17 @@ const styles = StyleSheet.create({
 	},
 
 	child: {
-		paddingVertical: dpi.xs + dpi.s,
-		paddingHorizontal: dpi.s,
+		padding: dpi.s,
 	},
 
 	input: {
 		flexGrow: 1,
-		color: colors.grey,
+		color: colors.black,
 	},
 
 	filterText: {
 		color: colors.primary,
-		fontWeight: 'bold',
+		fontWeight: '500',
 	}
 });
 
