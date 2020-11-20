@@ -1,4 +1,8 @@
 export const styles = {
+	centered: {
+		justifyContent: 'center',
+		alignItems: 'center',
+	}
 };
 
 export const variables = {
