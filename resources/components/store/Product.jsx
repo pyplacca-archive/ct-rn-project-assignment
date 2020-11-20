@@ -1,7 +1,8 @@
 import React from 'react';
 import { View, StyleSheet, Text, Image } from 'react-native';
 import { Rating } from '../';
-import { variables } from '../../utils';
+import * as utils from '../../utils';
+import bg from '../../../assets/bg.png';
 
 
 function Product (props) {
@@ -10,6 +11,7 @@ function Product (props) {
 	return (
 		<View style={[styles.container, props.style || {}]}>
 			<View style={styles.imgContainer}>
+				<Image source={bg} style={styles.bg} />
 				<Image source={image} style={styles.img}/>
 			</View>
 			<View style={styles.info}>
@@ -26,7 +28,8 @@ function Product (props) {
 	)
 };
 
-const { colors, dpi } = variables;
+const { colors, dpi } = utils.variables,
+{ styles: glob } = utils
 
 const styles = StyleSheet.create({
 	container: {
@@ -38,16 +41,19 @@ const styles = StyleSheet.create({
 
 	imgContainer: {
 		position: 'relative',
-		alignItems: 'center',
-		justifyContent: 'center',
-		backgroundColor: colors.white,
+		...glob.centered,
+		// backgroundColor: colors.white,
 		borderRadius: dpi.s,
 		width: dpi.l + dpi.m,
 		// flex: .4,
 		height: dpi.l + dpi.m,
-		// transform: [
-		// 	{skewX: '-5deg'}
-		// ]
+	},
+
+	bg: {
+		width: '100%',
+		height: '100%',
+		resizeMode: 'contain',
+		position: 'absolute',
 	},
 
 	img: {
@@ -55,7 +61,10 @@ const styles = StyleSheet.create({
 		width: '80%',
 		height: '100%',
 		resizeMode: 'contain',
-		top: -(dpi.m),
+		top: -(dpi.m - dpi.xs),
+		// transform: [
+		// 	{rotateY: '-90deg'}
+		// ]
 	},
 
 	info: {
