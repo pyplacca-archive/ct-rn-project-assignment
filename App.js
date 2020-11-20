@@ -18,6 +18,7 @@ export default function App() {
           review={3}
           sizes={['xs', 'S', 'M', 'L', 'XL']}
           price={110}
+          image={storehouse.jacketPhotos.red}
         />
       */}
         <ProductsStore
