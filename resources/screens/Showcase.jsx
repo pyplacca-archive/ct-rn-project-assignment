@@ -3,6 +3,8 @@ import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { Rating, Bar, ActionsBar } from '../components';
 import { ProductSizes, AddToCartLabel } from '../components/showcase';
 import * as icons from '../../assets/icons';
+import bg1 from '../../assets/bg1.png';
+import bgRect from '../../assets/bg-rect.png';
 import * as utils from '../utils';
 
 
@@ -15,6 +17,8 @@ function ProductShowcase (props) {
 			<ActionsBar onBack={() => console.log('back')}/>
 			{/* product image */}
 			<View style={styles.imgEnvelope}>
+				{/* that gradient background */}
+				<Image source={bg1} style={styles.bgImg}/>
 				<Image source={props.image} style={styles.prodImg}/>
 			</View>
 			{/* product name */}
@@ -29,6 +33,14 @@ function ProductShowcase (props) {
 			<Text style={styles.descr}>{props.description}</Text>
 			{/* product materials */}
 			<View style={[styles.label, styles.matLabel]}>
+				{/* that gradient background */}
+				<Image
+					source={bgRect}
+					style={[
+						styles.bgImg,
+						{resizeMode: 'stretch', left: 0, top: 0}
+					]}
+				/>
 				<Text
 					numberOfLines={1}
 					style={styles.matText}
@@ -52,7 +64,13 @@ function ProductShowcase (props) {
 	)
 };
 
-const { colors, dpi } = utils.variables;
+const { colors, dpi } = utils.variables,
+{ styles: glob } = utils;
+
+const imgAbs = {
+	position: 'absolute',
+	resizeMode: 'contain',
+}
 
 const styles = StyleSheet.create({
 	container: {
@@ -64,19 +82,28 @@ const styles = StyleSheet.create({
 
 	imgEnvelope: {
 		position: 'relative',
-		alignItems: 'center',
-		backgroundColor: colors.white,
+		...glob.centered,
+		// backgroundColor: colors.white,
 		width: '90%',
-		maxWidth: 300,
+		maxWidth: 320,
 		height: dpi.xl * 2,
 		alignSelf: 'center',
 		borderRadius: dpi.m,
 		marginBottom: dpi.m,
+		marginTop: dpi.m,
 	},
 
 	prodImg: {
-		position: 'absolute',
-		top: -dpi.m
+		top: -dpi.s,
+		width: '80%',
+		height: '90%',
+		...imgAbs
+	},
+
+	bgImg: {
+		width: '100%',
+		height: '100%',
+		...imgAbs,
 	},
 
 	prodName: {
@@ -113,12 +140,13 @@ const styles = StyleSheet.create({
 		left: -dpi.m,
 		marginVertical: dpi.s,
 		paddingLeft: dpi.m,
-		backgroundColor: colors.white
 	},
 
 	matText: {
 		color: colors.primary,
 		// fontWeight: 'bold',
+		zIndex: 2,
+		alignSelf: 'flex-start'
 	},
 
 	prsz: {
