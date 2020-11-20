@@ -26,7 +26,7 @@ function ProductShowcase (props) {
 			{/* review */}
 			<View style={styles.review}>
 				<Text>Review : </Text>
-				<Rating total={5} value={props.review} />
+				<Rating total={5} value={props.rating} />
 			</View>
 			<Bar style={styles.bar}/>
 			{/* product description */}
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
 		height: dpi.xl * 2,
 		alignSelf: 'center',
 		borderRadius: dpi.m,
-		marginBottom: dpi.m,
+		marginBottom: dpi.m - dpi.xs - 3,
 		marginTop: dpi.m,
 	},
 
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
 	},
 
 	prodName: {
-		fontSize: dpi.m - 5,
+		fontSize: dpi.m - 5 - 2,
 		fontWeight: '900',
 		marginBottom: dpi.s,
 	},
@@ -115,12 +115,11 @@ const styles = StyleSheet.create({
 	review: {
 		flexDirection: 'row',
 		alignItems: 'center',
-		marginBottom: dpi.s,
 	},
 
 	bar: {
 		width: dpi.l - dpi.s,
-		marginBottom: dpi.s,
+		marginVertical: dpi.m - dpi.xs,
 	},
 
 	descr: {
@@ -144,13 +143,13 @@ const styles = StyleSheet.create({
 
 	matText: {
 		color: colors.primary,
-		// fontWeight: 'bold',
 		zIndex: 2,
 		alignSelf: 'flex-start'
 	},
 
 	prsz: {
-		marginVertical: dpi.s
+		marginTop: dpi.s,
+		marginBottom: dpi.s + dpi.xs * 2
 	},
 
 	szBtn: {
