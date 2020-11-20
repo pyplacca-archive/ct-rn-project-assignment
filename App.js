@@ -5,26 +5,24 @@ import ProductsStore from './resources/screens/Store';
 import { variables } from './resources/utils';
 import storehouse from './resources/storehouse';
 
-// const {image, name, description, material, price, review, sizes} = props;
+// There currently 4 jackets in the store.
+// Change the index to view a different jacket
+const jacket = storehouse.jackets[3];
+
 export default function App() {
   return (
     <View style={styles.container}>
-      <StatusBar style="auto" backgroundColor={variables.colors.primary} />
+      <StatusBar
+        style="auto"
+        backgroundColor={variables.colors.primary}
+      />
+        <ProductShowcase {...jacket} />
       {/*
-        <ProductShowcase
-          name='Red Woman Jacket'
-          description='It is a long established fact that a reader will be distracted by the readable content of a page'
-          material='91% polyester, 9% elastane'
-          review={3}
-          sizes={['xs', 'S', 'M', 'L', 'XL']}
-          price={110}
-          image={storehouse.jacketPhotos.red}
-        />
-      */}
         <ProductsStore
           products={storehouse.jackets}
           category='Woman Jacket'
         />
+      */}
     </View>
   );
 }
