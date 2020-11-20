@@ -10,13 +10,13 @@ function ProductsStore ({category, products}) {
 		<View style={styles.container}>
 			<ActionsBar showLike={false} />
 			<Text style={styles.title}>{category}</Text>
-			<SearchBar />
+			<SearchBar style={styles.searchbar}/>
 			<FlatList
 				data={products}
 				renderItem={
 					({item}) => <Product {...item} style={styles.product} />
 				}
-				keyExtractor={(_, i) => i}
+				keyExtractor={item => item.id}
 				showsVerticalScrollIndicator ={false}
 				style={styles.listing}
 			/>
@@ -40,12 +40,17 @@ const styles = StyleSheet.create({
 		marginBottom: dpi.m - dpi.xs,
 	},
 
+	searchbar: {
+		marginBottom: dpi.s,
+	},
+
 	listing: {
 		paddingVertical: dpi.s,
 	},
 
 	product: {
-		marginVertical: dpi.s + dpi.xs,
+		marginTop: dpi.m - dpi.xs,
+		marginBottom: dpi.s + dpi.xs,
 	}
 });
 
