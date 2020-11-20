@@ -4,14 +4,15 @@ import { TextButton } from './buttons';
 import { variables } from '../utils';
 
 
-function SearchBar ({style, inputProps}) {
+function SearchBar ({style, inputProps={}}) {
+	const {style: inputStyle, ...rest} = inputProps;
 	return (
-		<View style={styles.container}>
+		<View style={[styles.container, style]}>
 			<TextInput
-				style={[styles.input, styles.child, style]}
+				style={[styles.input, styles.child, inputStyle]}
 				placeholder='Search Jacket'
 				placeholderColor={colors.sea}
-				{...inputProps}
+				{...rest}
 			/>
 			<TextButton
 				text='Filter'
